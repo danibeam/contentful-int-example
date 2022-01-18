@@ -1,14 +1,8 @@
-import { createClient } from "contentful";
+import { IArticle } from '../../schema/generated/contentful'
+import { contentfulClient } from '../contentful/client'
 
-export async function getArticles() {
-    const client = createClient({
-        space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
-        accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_KEY,
-    });
+export async function getArticles(): Promise<IArticle[]> {
+    const res = await contentfulClient.getEntries({ content_type: 'article' })
 
-    const res = await client.getEntries({ content_type: "article" });
-
-    return {
-        articles: res.items,
-    };
+    return res.items as IArticle[]
 }
