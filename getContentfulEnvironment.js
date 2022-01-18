@@ -1,12 +1,7 @@
-const contentfulManagement = require('contentful-management')
+const contentfulClientManagement = require('./src/services/contentful/manager')
 
 module.exports = async function () {
-    const contentfulClient = contentfulManagement.createClient({
-        accessToken: 'CFPAT-ufUdhGQvmQZ3FvI3CGwLb01s2CB0Vbx5KswJfbuvi4w',
-        // host: 'preview.contentful.com',
-    })
-
-    return contentfulClient
+    return contentfulClientManagement
         .getSpace('1z0oyoa7tujn')
         .then((space) => space.getEnvironment('master'))
 }
